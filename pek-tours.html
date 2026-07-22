@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ПЕК — Авторские путешествия</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1C2B39;
+    --paper: #F5EFE0;
+    --paper-dim: #ECE4D0;
+    --stamp-red: #B8442F;
+    --atlas-green: #5C7A6E;
+    --text: #2A2118;
+    --text-soft: #6B5F4E;
+    --line: rgba(42, 33, 24, 0.16);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 56px 0 40px;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--stamp-red);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 22px;
+    height: 1px;
+    background: var(--stamp-red);
+  }
+
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(36px, 9vw, 52px);
+    line-height: 1.14;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    max-width: 480px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--stamp-red);
+  }
+
+  .hero-sub {
+    margin-top: 20px;
+    font-size: 16px;
+    color: var(--text-soft);
+    max-width: 420px;
+    line-height: 1.6;
+  }
+
+  .hero-meta {
+    margin-top: 28px;
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+  }
+
+  .hero-meta-item {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-soft);
+  }
+
+  .hero-meta-item b {
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  /* divider - perforation style */
+  .perf {
+    display: flex;
+    gap: 7px;
+    padding: 6px 0;
+    overflow: hidden;
+  }
+  .perf span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--paper-dim);
+    border: 1px solid var(--line);
+    flex-shrink: 0;
+  }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--atlas-green);
+    padding: 36px 0 18px;
+  }
+
+  /* TOUR CARD - passport page style */
+  .tours { display: flex; flex-direction: column; gap: 22px; padding-bottom: 20px; }
+
+  .tour {
+    position: relative;
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    border-radius: 3px;
+    padding: 26px 22px 22px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .tour::before {
+    /* left perforation strip like a ticket stub */
+    content: '';
+    position: absolute;
+    left: -1px; top: 24px; bottom: 24px;
+    width: 1px;
+    background-image: repeating-linear-gradient(to bottom, var(--ink) 0 4px, transparent 4px 9px);
+    opacity: 0.35;
+  }
+
+  .tour:hover {
+    transform: translateY(-2px);
+    box-shadow: 6px 6px 0 rgba(28, 43, 57, 0.08);
+  }
+
+  .tour-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .tour-flags {
+    font-size: 22px;
+    letter-spacing: 0.06em;
+  }
+
+  .tour-status {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .tour-status.open {
+    background: rgba(92, 122, 110, 0.14);
+    color: var(--atlas-green);
+    border: 1px solid rgba(92, 122, 110, 0.3);
+  }
+  .tour-status.low {
+    background: rgba(184, 68, 47, 0.1);
+    color: var(--stamp-red);
+    border: 1px solid rgba(184, 68, 47, 0.28);
+  }
+
+  .tour h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 23px;
+    line-height: 1.22;
+    color: var(--ink);
+    margin-bottom: 14px;
+    max-width: 92%;
+  }
+
+  .tour-meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--line);
+  }
+
+  .tour-dates {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    color: var(--text-soft);
+    line-height: 1.5;
+  }
+  .tour-dates b {
+    display: block;
+    font-size: 9.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    opacity: 0.7;
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+
+  .tour-price {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+    text-align: right;
+    white-space: nowrap;
+  }
+  .tour-price span {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    opacity: 0.7;
+    margin-top: 1px;
+  }
+
+  .tour-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+
+  .tour-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding-bottom: 2px;
+    border-bottom: 1.5px solid var(--ink);
+    transition: color 0.2s ease, border-color 0.2s ease, gap 0.2s ease;
+  }
+  .tour-link:hover {
+    color: var(--stamp-red);
+    border-color: var(--stamp-red);
+    gap: 9px;
+  }
+
+  .tour-book {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 9px 16px;
+    border-radius: 30px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .tour-book:hover { background: var(--stamp-red); transform: translateY(-1px); }
+
+  /* INCLUDED */
+  .included {
+    padding: 8px 0 6px;
+  }
+  .included ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 11px 14px;
+  }
+  .included li {
+    font-size: 13.5px;
+    color: var(--text-soft);
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.4;
+  }
+  .included li::before {
+    content: '✓';
+    position: absolute;
+    left: 0; top: 0;
+    color: var(--atlas-green);
+    font-weight: 700;
+    font-size: 13px;
+  }
+
+  /* VISA NOTE */
+  .visa-note {
+    background: var(--paper-dim);
+    border-left: 3px solid var(--stamp-red);
+    padding: 16px 18px;
+    border-radius: 0 4px 4px 0;
+    margin: 22px 0;
+  }
+  .visa-note b {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--stamp-red);
+    margin-bottom: 7px;
+  }
+  .visa-note p { font-size: 13.5px; color: var(--text-soft); line-height: 1.55; }
+  .visa-note p + p { margin-top: 8px; }
+
+  /* FOOTER / CONTACT */
+  footer {
+    padding: 44px 0 56px;
+    text-align: center;
+  }
+
+  .footer-line {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 19px;
+    color: var(--ink);
+    margin-bottom: 22px;
+    line-height: 1.4;
+  }
+
+  .contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 15px 28px;
+    border-radius: 40px;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .contact-btn:hover { background: var(--stamp-red); transform: translateY(-2px); }
+
+  .footer-sub {
+    margin-top: 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--text-soft);
+    opacity: 0.75;
+  }
+
+  @media (max-width: 400px) {
+    .included ul { grid-template-columns: 1fr; }
+    .tour h3 { font-size: 20px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <section class="hero">
+    <div class="hero-eyebrow">ПЕК: есть, пить и колесить</div>
+    <h1>Авторские <em>путешествия</em><br>по Европе</h1>
+    <p class="hero-sub">Веду мини-группы сам — не по шаблону турагентства, а по местам которые люблю. Своя кухня, свои маршруты, никаких толп.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><b>10 лет</b> в дороге</div>
+      <div class="hero-meta-item"><b>38 стран</b> за плечами</div>
+      <div class="hero-meta-item">группы до <b>8 человек</b></div>
+    </div>
+  </section>
+
+  <div class="perf"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+  <div class="section-label">Ближайшие туры</div>
+
+  <div class="tours">
+
+    <!-- TOUR 1 -->
+    <div class="tour">
+      <div class="tour-top">
+        <div class="tour-flags">🇭🇺🇦🇹🇨🇿</div>
+        <div class="tour-status open">Идёт набор</div>
+      </div>
+      <h3>Осеннее путешествие: Венгрия + Австрия + Чехия</h3>
+      <div class="tour-meta-row">
+        <div class="tour-dates"><b>Даты</b>26 сент — 6 окт</div>
+        <div class="tour-price">130 000 ₽<span>с человека</span></div>
+      </div>
+      <div class="tour-cta">
+        <a href="#" class="tour-link">Программа тура →</a>
+        <a href="https://t.me/kirillpekov" class="tour-book">Написать</a>
+      </div>
+    </div>
+
+    <!-- TOUR 2 -->
+    <div class="tour">
+      <div class="tour-top">
+        <div class="tour-flags">🇭🇺🇦🇹🇩🇪</div>
+        <div class="tour-status low">Осталось 7 мест</div>
+      </div>
+      <h3>Граффити-тур: Будапешт + Вена + Берлин</h3>
+      <div class="tour-meta-row">
+        <div class="tour-dates"><b>Даты</b>10 — 18 октября</div>
+        <div class="tour-price">130 000 ₽<span>с человека</span></div>
+      </div>
+      <div class="tour-cta">
+        <a href="#" class="tour-link">Программа тура →</a>
+        <a href="https://t.me/kirillpekov" class="tour-book">Написать</a>
+      </div>
+    </div>
+
+    <!-- TOUR 3 -->
+    <div class="tour">
+      <div class="tour-top">
+        <div class="tour-flags">🇭🇺🇩🇪</div>
+        <div class="tour-status open">Идёт набор</div>
+      </div>
+      <h3>Рождественские ярмарки: Будапешт + Берлин</h3>
+      <div class="tour-meta-row">
+        <div class="tour-dates"><b>Даты</b>21–29 ноя / 12–20 дек</div>
+        <div class="tour-price">120 000 ₽<span>с человека</span></div>
+      </div>
+      <div class="tour-cta">
+        <a href="#" class="tour-link">Программа тура →</a>
+        <a href="https://t.me/kirillpekov" class="tour-book">Написать</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-label">Что входит в стоимость</div>
+  <div class="included">
+    <ul>
+      <li>Проживание</li>
+      <li>Моё сопровождение по маршруту</li>
+      <li>Помощь с визой и документами</li>
+      <li>Подбор авиабилетов</li>
+      <li>Классные локации не из путеводителя</li>
+      <li>Фото на плёнку в дороге</li>
+    </ul>
+  </div>
+
+  <div class="visa-note">
+    <b>Про визу и оплату</b>
+    <p>Оформляем через Венгрию — сейчас самый быстрый и предсказуемый вариант, слоты есть даже на ближайшую неделю.</p>
+    <p>Оплата частями: 10 000 ₽ предоплата до визы + авиабилеты, остаток — двумя частями после получения визы.</p>
+  </div>
+
+  <div class="perf"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+  <footer>
+    <p class="footer-line">Пишите — расскажу подробности<br>и помогу с подготовкой.</p>
+    <a href="https://t.me/kirillpekov" class="contact-btn">
+      Написать в Telegram
+    </a>
+    <p class="footer-sub">@kirillpekov · ПЕК: есть, пить и колесить</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
