@@ -214,47 +214,37 @@
     text-overflow: ellipsis;
   }
 
-  @media (max-width: 768px) {
+ @media (max-width: 768px) {
   .polaroid-scatter {
-    padding: 20px 5px;
-    gap: 0;
+    padding: 30px 10px 40px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap; /* Карточки стоят в один ряд без переносов */
+    overflow-x: auto;  /* Включаем горизонтальную прокрутку пальцем */
+    -webkit-overflow-scrolling: touch; /* Плавный скролл на iPhone */
+    gap: 12px;
   }
+  
   .polaroid { 
-    width: 110px;      
-    height: 135px; 
-    padding: 6px 6px 12px; 
-    box-shadow: 0 4px 10px rgba(28, 43, 57, 0.12);
-    transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+    width: 120px;      /* Оптимальный базовый размер для экрана смартфона */
+    height: 150px; 
+    padding: 8px 8px 14px; 
+    box-shadow: 0 4px 12px rgba(28, 43, 57, 0.1);
+    margin: 0 !important; /* Убираем маргины, чтобы не ломать прокрутку */
+    rotate: 0deg !important; /* Отключаем повороты, чтобы избежать размытия текста */
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   }
-  .polaroid-caption { font-size: 8px; bottom: 4px; }
+  
+  .polaroid-caption { font-size: 9px; bottom: 5px; }
 
-  .polaroid:nth-child(1) { rotate: -6deg; margin: 0 -12px 10px 0; }
-  .polaroid:nth-child(2) { rotate: 4deg; margin: -4px -8px 0 0; z-index: 2; }
-  .polaroid:nth-child(3) { rotate: -3deg; margin: 12px -6px 0 0; z-index: 3; }
-  .polaroid:nth-child(4) { rotate: 6deg; margin: -6px -10px 0 0; z-index: 1; }
-  .polaroid:nth-child(5) { rotate: -4deg; margin: 6px 0 0 0; z-index: 2; }
-
-  /* ЭФФЕКТ ДЛЯ МОБИЛЬНЫХ: выводим карточку по центру экрана поверх всего сайта */
+  /* УВЕЛИЧЕНИЕ НА МЕСТЕ: Полностью решает проблему с прыжками сайта */
   .polaroid.active {
-    position: fixed !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) scale(1) rotate(0deg) !important;
-    width: 280px !important;  /* Комфортный крупный размер для телефона */
-    height: 330px !important;
-    padding: 15px 15px 25px !important;
+    position: relative !important; 
+    transform: scale(1.6) !important; /* Карточка плавно увеличивается в 1.6 раз прямо там, где нажали */
     z-index: 9999 !important;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.5) !important;
-    margin: 0 !important;   /* Сбрасываем хаотичные отступы */
+    box-shadow: 0 15px 35px rgba(28, 43, 57, 0.3) !important;
   }
 }
-    /* Возвращаем индивидуальные наклоны и наезды друг на друга на мобильных */
-    .polaroid:nth-child(1) { rotate: -6deg; margin: 0 -12px 10px 0; }
-    .polaroid:nth-child(2) { rotate: 4deg; margin: -4px -8px 0 0; z-index: 2; }
-    .polaroid:nth-child(3) { rotate: -3deg; margin: 12px -6px 0 0; z-index: 3; }
-    .polaroid:nth-child(4) { rotate: 6deg; margin: -6px -10px 0 0; z-index: 1; }
-    .polaroid:nth-child(5) { rotate: -4deg; margin: 6px 0 0 0; z-index: 2; }
-  }
 
   /* HERO */
   .hero {
