@@ -820,23 +820,26 @@
   
 <script src="https://cloudflare.com"></script>
 
-    <script>
+  <script>
   document.querySelectorAll('.polaroid').forEach(card => {
     card.addEventListener('click', function(e) {
-      // Проверяем, активна ли уже выбранная карточка
+      // КРИТИЧЕСКИЙ МОМЕНТ: эта строчка запрещает браузеру 
+      // открывать картинку в новом окне, даже если ссылки всё еще в коде
+      e.preventDefault(); 
+      
       const isActive = this.classList.contains('active');
       
-      // Снимаем активность со всех остальных карточек на странице
+      // Закрываем все остальные открытые карточки
       document.querySelectorAll('.polaroid').forEach(c => c.classList.remove('active'));
       
-      // Если карточка не была активной, делаем её активной
+      // Если текущая карточка не была увеличена — увеличиваем её
       if (!isActive) {
         this.classList.add('active');
       }
     });
   });
 
-  // Если кликнуть в любое пустое место сайта — карточка уменьшится обратно
+  // Если кликнуть в пустое место сайта — открытая карточка уменьшится обратно
   document.addEventListener('click', function(e) {
     if (!e.target.closest('.polaroid')) {
       document.querySelectorAll('.polaroid').forEach(c => c.classList.remove('active'));
