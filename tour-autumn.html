@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Осеннее путешествие — Венгрия, Австрия, Чехия | ПЕК</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1C2B39;
+    --paper: #F5EFE0;
+    --paper-dim: #ECE4D0;
+    --stamp-red: #B8442F;
+    --atlas-green: #5C7A6E;
+    --text: #2A2118;
+    --text-soft: #6B5F4E;
+    --line: rgba(42, 33, 24, 0.16);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wrap { max-width: 640px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2; }
+
+  /* BACK LINK */
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-soft);
+    text-decoration: none;
+    padding: 22px 0 0;
+  }
+  .back:hover { color: var(--stamp-red); }
+
+  /* HERO */
+  .hero { padding: 20px 0 32px; }
+
+  .hero-flags { font-size: 30px; letter-spacing: 0.08em; margin-bottom: 18px; }
+
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(30px, 8vw, 42px);
+    line-height: 1.14;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .hero h1 em { font-style: italic; font-weight: 400; color: var(--stamp-red); }
+
+  .hero-sub {
+    margin-top: 16px;
+    font-size: 15.5px;
+    color: var(--text-soft);
+    max-width: 460px;
+    line-height: 1.6;
+  }
+
+  /* TICKET STRIP - key facts */
+  .ticket {
+    margin-top: 24px;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 6px;
+    padding: 18px 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .ticket::after {
+    content: '';
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 1px;
+    background-image: repeating-linear-gradient(to bottom, rgba(245,239,224,0.4) 0 4px, transparent 4px 9px);
+  }
+  .ticket-item b {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+  .ticket-item span { font-size: 15px; font-weight: 600; }
+  .ticket-item.price span { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600; color: #E8B4A8; }
+
+  .perf {
+    display: flex; gap: 7px; padding: 26px 0; overflow: hidden;
+  }
+  .perf span {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--paper-dim); border: 1px solid var(--line); flex-shrink: 0;
+  }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--atlas-green);
+    padding: 6px 0 20px;
+  }
+
+  /* HIGHLIGHTS */
+  .highlights { padding-bottom: 8px; }
+  .highlights ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+  .highlights li {
+    font-size: 14.5px; color: var(--text); padding-left: 22px; position: relative; line-height: 1.5;
+  }
+  .highlights li::before {
+    content: '✦'; position: absolute; left: 0; top: 1px; color: var(--stamp-red); font-size: 12px;
+  }
+
+  /* DAY ENTRIES */
+  .days { display: flex; flex-direction: column; gap: 0; }
+
+  .day {
+    position: relative;
+    padding: 22px 0 22px 54px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .day:last-child { border-bottom: none; }
+
+  .day-num {
+    position: absolute;
+    left: 0; top: 22px;
+    width: 40px; height: 40px;
+    border: 1.5px solid var(--ink);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ink);
+    background: var(--paper);
+    flex-shrink: 0;
+  }
+
+  .day-city {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--atlas-green);
+    margin-bottom: 5px;
+  }
+
+  .day h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 18.5px;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .day p { font-size: 14px; color: var(--text-soft); line-height: 1.6; }
+  .day p + p { margin-top: 8px; }
+
+  /* FOOD SECTION */
+  .food-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+  }
+  .food-col b {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--atlas-green);
+    margin-bottom: 10px;
+  }
+  .food-col ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .food-col li { font-size: 13px; color: var(--text-soft); line-height: 1.4; }
+
+  /* INCLUDED */
+  .included ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 11px 14px;
+  }
+  .included li {
+    font-size: 13.5px; color: var(--text-soft); padding-left: 20px; position: relative; line-height: 1.4;
+  }
+  .included li::before {
+    content: '✓'; position: absolute; left: 0; top: 0; color: var(--atlas-green); font-weight: 700; font-size: 13px;
+  }
+
+  .note {
+    background: var(--paper-dim);
+    border-left: 3px solid var(--stamp-red);
+    padding: 16px 18px;
+    border-radius: 0 4px 4px 0;
+    margin: 4px 0 0;
+  }
+  .note p { font-size: 13.5px; color: var(--text-soft); line-height: 1.55; }
+
+  /* FOOTER */
+  footer { padding: 40px 0 56px; text-align: center; }
+  .footer-line {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink);
+    margin-bottom: 22px;
+    line-height: 1.4;
+  }
+  .contact-btn {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: var(--ink); color: var(--paper);
+    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 15px;
+    padding: 15px 28px; border-radius: 40px; text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .contact-btn:hover { background: var(--stamp-red); transform: translateY(-2px); }
+  .footer-sub {
+    margin-top: 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--text-soft);
+    opacity: 0.75;
+  }
+
+  @media (max-width: 420px) {
+    .ticket { grid-template-columns: 1fr; }
+    .food-grid { grid-template-columns: 1fr; gap: 18px; }
+    .day { padding-left: 46px; }
+    .day-num { width: 34px; height: 34px; font-size: 11px; top: 22px; }
+  }
+
+  /* POLAROID (single, inline) */
+  .polaroid-inline {
+    background: #fff;
+    padding: 9px 9px 30px;
+    box-shadow: 0 8px 20px rgba(28, 43, 57, 0.14), 0 2px 5px rgba(28, 43, 57, 0.08);
+    width: 100%;
+    max-width: 240px;
+    margin: 22px auto 26px;
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+  .polaroid-inline:hover { transform: scale(1.03) rotate(0deg) !important; }
+  .polaroid-inline.rot-l { rotate: -3.5deg; }
+  .polaroid-inline.rot-r { rotate: 3deg; }
+
+  .polaroid-inline .polaroid-frame {
+    width: 100%;
+    aspect-ratio: 1 / 1.05;
+    background:
+      repeating-linear-gradient(45deg, rgba(92,122,110,0.08) 0 10px, transparent 10px 20px),
+      var(--paper-dim);
+    border: 1px dashed rgba(42, 33, 24, 0.28);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+  }
+  .polaroid-inline .polaroid-frame img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .polaroid-inline .polaroid-hint {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    line-height: 1.6;
+    color: var(--text-soft);
+    padding: 10px;
+    opacity: 0.75;
+  }
+  .polaroid-inline .polaroid-caption {
+    position: absolute;
+    bottom: 8px; left: 10px; right: 10px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-soft);
+    text-align: center;
+  }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+  <a href="index.html" class="back">← Все туры</a>
+
+  <section class="hero">
+    <div class="hero-flags">🇭🇺🇦🇹🇨🇿</div>
+    <h1>Осеннее <em>путешествие</em><br>в Венгрию, Австрию и Чехию</h1>
+    <p class="hero-sub">Три страны, одна золотая осень. Будапешт, Вена и Прага — с гастрономией трёх культур и моим сопровождением от начала до конца.</p>
+
+    <div class="ticket">
+      <div class="ticket-item"><b>Даты</b><span>26 сент — 6 окт</span></div>
+      <div class="ticket-item"><b>Длительность</b><span>11 дней</span></div>
+      <div class="ticket-item"><b>Группа</b><span>до 8 человек</span></div>
+      <div class="ticket-item price"><b>Стоимость</b><span>130 000 ₽</span></div>
+    </div>
+  </section>
+
+  <div class="polaroid-inline rot-l">
+    <div class="polaroid-frame">
+      <!-- Замени: <img src="images/autumn-cover.jpg" alt="Осенний тур"> -->
+      <div class="polaroid-hint">images/<br>autumn-cover.jpg</div>
+    </div>
+    <div class="polaroid-caption">Осень, три страны</div>
+  </div>
+
+  <div class="section-label">Главные впечатления</div>
+  <div class="highlights">
+    <ul>
+      <li>Купальни Сечени и руин-бары Будапешта</li>
+      <li>Ночной Дунай и подсвеченный Парламент с воды</li>
+      <li>Дворцы Бельведер и Шёнбрунн в Вене</li>
+      <li>Карлов мост и Пражский Град</li>
+      <li>Гастрономия трёх культур в одном маршруте</li>
+    </ul>
+  </div>
+
+  <div class="perf"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+  <div class="section-label">Программа по дням</div>
+
+  <div class="days">
+
+    <div class="day">
+      <div class="day-num">01</div>
+      <div class="day-city">По пути</div>
+      <h3>Стамбул, пересадка</h3>
+      <p>Вылет в Стамбул, гуляем по городу, вечером — вылет в Венгрию.</p>
+    </div>
+
+    <div class="day">
+      <div class="day-num">02</div>
+      <div class="day-city">Будапешт</div>
+      <h3>Купальни и сердце города</h3>
+      <p>С утра — купальни Сечени. После — прогулка по городу: Рыбацкий бастион, Цепной мост, Пепельная (костяная) синагога и другие знаковые места.</p>
+      <p>Вечером — руинные бары. Это must.</p>
+    </div>
+
+    <div class="polaroid-inline rot-r">
+      <div class="polaroid-frame">
+        <!-- Замени: <img src="images/budapest.jpg" alt="Будапешт"> -->
+        <div class="polaroid-hint">images/<br>budapest.jpg</div>
+      </div>
+      <div class="polaroid-caption">Будапешт</div>
+    </div>
+
+    <div class="day">
+      <div class="day-num">03</div>
+      <div class="day-city">Будапешт</div>
+      <h3>Музеи и Дунай</h3>
+      <p>Посещаем музей Уникума. Дальше — свободное время или купальни по желанию, Будапешт всё же столица-курорт.</p>
+      <p>Вечером — прогулка на кораблике по Дунаю. Ночной Парламент — это любовь.</p>
+    </div>
+
+    <div class="day">
+      <div class="day-num">04</div>
+      <div class="day-city">Будапешт</div>
+      <h3>Свободный день</h3>
+      <p>Полностью свободный день. Подскажу винтажные магазины, виниловые пластинки, интересные сувениры и ТЦ с одеждой и обувью.</p>
+      <p>По желанию — выезд в маленькие города Венгрии или на озеро Балатон.</p>
+    </div>
+
+    <div class="day">
+      <div class="day-num">05</div>
+      <div class="day-city">Будапешт</div>
+      <h3>Дегустация и завершение</h3>
+      <p>Если наберётся группа желающих — дегустационный сет из венгерских вин и сыров. Последний вечер в городе перед переездом.</p>
+    </div>
+
+    <div class="day">
+      <div class="day-num">06</div>
+      <div class="day-city">Вена</div>
+      <h3>Сосиски и архитектура</h3>
+      <p>С утра выезжаем на поезде в Вену, заселяемся в отель. Идём есть кюрривурст — местные так обожают эти сосиски, что после оперы люди в смокингах едут их есть.</p>
+      <p>После ланча — осмотр центра: парламент, красивые улочки, венский собор, мусоросжигательный завод в майоликовом стиле (да, это действительно достопримечательность).</p>
+    </div>
+
+    <div class="polaroid-inline rot-l">
+      <div class="polaroid-frame">
+        <!-- Замени: <img src="images/vienna.jpg" alt="Вена"> -->
+        <div class="polaroid-hint">images/<br>vienna.jpg</div>
+      </div>
+      <div class="polaroid-caption">Вена</div>
+    </div>
+
+    <div class="day">
+      <div class="day-num">07</div>
+      <div class="day-city">Вена</div>
+      <h3>Дворцы и искусство</h3>
+      <p>Осмотр двух дворцов: Бельведер и Шёнбрунн. Помогу купить билеты в Леопольд-музей (там Густав Климт) или в оперу.</p>
+    </div>
+
+    <div class="day">
+      <div class="day-num">08</div>
+      <div class="day-city">Вена</div>
+      <h3>Свободный день</h3>
+      <p>Город ваш. Подскажу винтажные магазины, кофейни где пьют местные, галереи и небольшие музеи, куда сходить вечером.</p>
+    </div>
+
+    <div class="day">
+      <div class="day-num">09</div>
+      <div class="day-city">Прага</div>
+      <h3>Переезд и сердце города</h3>
+      <p>Утром выезжаем на поезде или автобусе в Прагу, заселяемся в отель. После — знакомимся с городом: Карлов мост, Старая городская площадь с курантами, Пороховая башня.</p>
+      <p>Вечером — прогулка по центру, ужин в местном ресторане.</p>
+    </div>
+
+    <div class="polaroid-inline rot-r">
+      <div class="polaroid-frame">
+        <!-- Замени: <img src="images/prague.jpg" alt="Прага"> -->
+        <div class="polaroid-hint">images/<br>prague.jpg</div>
+      </div>
+      <div class="polaroid-caption">Прага</div>
+    </div>
+
+    <div class="day">
+      <div class="day-num">10</div>
+      <div class="day-city">Прага</div>
+      <h3>Пражский Град</h3>
+      <p>Поднимаемся в Пражский Град — один из крупнейших замковых комплексов в мире. Собор Святого Вита, старый королевский дворец, Золотая улочка.</p>
+      <p>Виды на город сверху — отдельное удовольствие. Свободное время после осмотра.</p>
+    </div>
+
+    <div class="day">
+      <div class="day-num">11</div>
+      <div class="day-city">Возвращение</div>
+      <h3>Домой</h3>
+      <p>Уезжаем обратно. Подберу оптимальные билеты под ваш бюджет и помогу с логистикой, чтобы вы не потерялись.</p>
+    </div>
+
+  </div>
+
+  <div class="perf"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+  <div class="section-label">Вкусная часть (куда без неё)</div>
+  <div class="food-grid">
+    <div class="food-col">
+      <b>Венгрия</b>
+      <ul>
+        <li>Гуляш</li>
+        <li>Лангош</li>
+        <li>Кюртёшкалач</li>
+        <li>Эстерхази</li>
+      </ul>
+    </div>
+    <div class="food-col">
+      <b>Австрия</b>
+      <ul>
+        <li>Сосиски</li>
+        <li>Шницель</li>
+        <li>Кордон блю</li>
+        <li>Штрудель</li>
+      </ul>
+    </div>
+    <div class="food-col">
+      <b>Чехия</b>
+      <ul>
+        <li>Свичкова</li>
+        <li>Кнедлики</li>
+        <li>Чешское пиво</li>
+        <li>Трдельник</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note" style="margin-top: 20px;">
+    <p>Подскажу по винам Венгрии и Австрии. Вена, кстати — единственная европейская столица, где виноградники раскинуты прямо в черте города.</p>
+  </div>
+
+  <div class="section-label" style="padding-top: 32px;">Что входит в стоимость</div>
+  <div class="included">
+    <ul>
+      <li>Проживание</li>
+      <li>Моё сопровождение по маршруту</li>
+      <li>Помощь с визой и документами</li>
+      <li>Подбор авиабилетов</li>
+      <li>Мои фото в дороге</li>
+      <li>Рекомендации по местам</li>
+    </ul>
+  </div>
+
+  <div class="note" style="margin-top: 20px;">
+    <p><b style="color: var(--stamp-red); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; display: block; margin-bottom: 7px;">Оплата и виза</b>Оформляем через Венгрию. Оплата частями: 10 000 ₽ предоплата до визы + авиабилеты, остаток — двумя частями после получения визы.</p>
+  </div>
+
+  <div class="polaroid-inline rot-l">
+    <div class="polaroid-frame">
+      <!-- Замени: <img src="images/group-final.jpg" alt="Группа"> -->
+      <div class="polaroid-hint">images/<br>group-final.jpg</div>
+    </div>
+    <div class="polaroid-caption">До встречи в туре</div>
+  </div>
+
+  <div class="perf"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+  <footer>
+    <p class="footer-line">Маршрут живой и может<br>чуть меняться под группу и сезон.</p>
+    <a href="https://t.me/kirillpekov" class="contact-btn">Написать в Telegram</a>
+    <p class="footer-sub">@kirillpekov · ПЕК: есть, пить и колесить</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
