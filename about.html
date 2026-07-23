@@ -64,7 +64,17 @@
     margin: 30px auto 8px;
     rotate: -2deg;
     position: relative;
+    /* Добавляем плавность для анимации увеличения при клике */
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease, z-index 0s; 
   }
+  
+  /* Эффект увеличения для главного фото при клике (на ПК и мобильных) */
+  .main-photo.active {
+    transform: scale(1.2) rotate(0deg) !important;
+    z-index: 9999 !important;
+    box-shadow: 0 25px 50px rgba(28, 43, 57, 0.35);
+  }
+
   .main-photo .polaroid-frame {
     width: 100%;
     aspect-ratio: 1 / 1.06;
@@ -78,9 +88,15 @@
     text-align: center;
     overflow: hidden;
   }
+  
   .main-photo .polaroid-frame img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    display: block;
+    flex-shrink: 0; /* ИСПРАВЛЕНО: картинка гарантированно не сожмется */
   }
+  
   .main-photo .polaroid-hint {
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
@@ -89,6 +105,7 @@
     padding: 12px;
     opacity: 0.75;
   }
+  
   .main-photo .polaroid-caption {
     position: absolute;
     bottom: 14px; left: 12px; right: 12px;
@@ -314,12 +331,12 @@
   <a href="index.html" class="back">← Все туры</a>
 
   <div class="main-photo">
-    <div class="polaroid-frame">
-      <img src="photo1about.jpg" alt="Кирилл">
-      <div class="polaroid-hint">images/<br>me-main.jpg</div>
-    </div>
-    <div class="polaroid-caption">for sale pub – любимый ресторан в Будапеште</div>
+  <div class="polaroid-frame">
+    <!-- Оставляем ТОЛЬКО картинку и пишем правильный путь к файлу -->
+    <img src="photo1about.jpg" alt="Кирилл">
   </div>
+  <div class="polaroid-caption">for sale pub – любимый ресторан в Будапеште</div>
+</div>
 
   <section class="about-hero">
     <div class="about-eyebrow">Обо мне</div>
@@ -350,48 +367,55 @@
 
   <div class="perf"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
 
-  <div class="section-label">Моменты из поездок</div>
+<div class="section-label">Моменты из поездок</div>
 
-  <div class="carousel-wrap">
-    <div class="carousel">
-      <div class="carousel-item">
-        <div class="polaroid-frame">
-          <img src="photo2about.jpg" alt="Из поездки">
-          <div class="polaroid-hint">images/<br>photo2about.jpg</div>
-        </div>
-        <div class="polaroid-caption">Будапешт</div>
-      </div>
-      <div class="carousel-item">
-        <div class="polaroid-frame">
-          <img src="photo3about.jpg" alt="Из поездки">
-          <div class="polaroid-hint">images/<br>photo3about.jpg</div>
-        </div>
-        <div class="polaroid-caption">Вена</div>
-      </div>
-      <div class="carousel-item">
-        <div class="polaroid-frame">
-          <img src="photo4about.jpg" alt="Из поездки">
-          <div class="polaroid-hint">images/<br>carousel-3.jpg</div>
-        </div>
-        <div class="polaroid-caption">Рим</div>
-      </div>
-      <div class="carousel-item">
-        <div class="polaroid-frame">
-          <img src="photo5about.jpg" alt="Из поездки">
-          <div class="polaroid-hint">images/<br>photo5about.jpg</div>
-        </div>
-        <div class="polaroid-caption">Хельсинки</div>
-      </div>
-      <div class="carousel-item">
-        <div class="polaroid-frame">
-          <img src="photo6about.jpg" alt="Из поездки">
-          <div class="polaroid-hint">images/<br>photo6about.jpg</div>
-        </div>
-        <div class="polaroid-caption">Париж</div>
-      </div>
+<!-- Оставляем только один главный контейнер для поляроидов -->
+<div class="polaroid-scatter">
+
+  <!-- Карточка 1 -->
+  <div class="polaroid">
+    <div class="polaroid-frame">
+      <img src="photo2about.jpg" alt="Будапешт">
     </div>
-    <div class="carousel-hint-text">← свайпайте →</div>
+    <div class="polaroid-caption"></div>  
   </div>
+
+  <!-- Карточка 2 -->
+  <div class="polaroid">
+    <div class="polaroid-frame">
+      <img src="photo3about.jpg" alt="Вена">
+    </div>
+    <div class="polaroid-caption"></div> 
+  </div>
+
+  <!-- Карточка 3 -->
+  <div class="polaroid">
+    <div class="polaroid-frame">
+      <img src="carousel-3.jpg" alt="Рим">
+    </div>
+    <div class="polaroid-caption"></div>  
+  </div>
+
+  <!-- Карточка 4 -->
+  <div class="polaroid">
+    <div class="polaroid-frame">
+      <img src="photo5about.jpg" alt="Хельсинки">
+    </div>
+    <div class="polaroid-caption"></div> 
+  </div>
+
+  <!-- Карточка 5 -->
+  <div class="polaroid">
+    <div class="polaroid-frame">
+      <img src="photo6about.jpg" alt="Париж">
+    </div>
+    <div class="polaroid-caption"></div> 
+  </div>
+
+</div>
+
+<!-- Подсказку для мобильных выносим аккуратно под контейнер -->
+<div class="carousel-hint-text">← свайпайте →</div>
 
   <div class="social-row">
     <a href="https://instagram.com/mr.pekov" class="social-btn" target="_blank" rel="noopener">
@@ -413,6 +437,36 @@
   </footer>
 
 </div>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Находим и маленькие карточки, и большое главное фото
+    const allCards = document.querySelectorAll('.polaroid, .main-photo');
+    
+    allCards.forEach(card => {
+      card.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const isActive = this.classList.contains('active');
+        
+        // Закрываем абсолютно все открытые карточки на странице
+        allCards.forEach(c => c.classList.remove('active'));
+        
+        // Переключаем текущую
+        if (!isActive) {
+          this.classList.add('active');
+        }
+      });
+    });
+
+    // Клик мимо карточек возвращает всё в исходный размер
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.polaroid, .main-photo')) {
+        allCards.forEach(c => c.classList.remove('active'));
+      }
+    });
+  });
+</script>
 
 </body>
 </html>
