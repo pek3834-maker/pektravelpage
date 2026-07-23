@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+  <link rel="stylesheet" href="https://cloudflare.com">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ПЕК — Авторские путешествия</title>
@@ -208,16 +209,25 @@
   }
 
   /* Адаптив для мобильных, чтобы огромные карточки не ломали экран смартфона */
-  @media (max-width: 768px) {
-    .polaroid { 
-      width: 140px; 
-      height: 170px; 
-      padding: 10px 10px 18px; 
+ @media (max-width: 768px) {
+    .polaroid-scatter {
+      padding: 20px 5px;
+      gap: 0; /* Убираем зазоры, чтобы работали отрицательные маргины */
     }
-    .polaroid-caption { font-size: 10.5px; bottom: 7px; }
-    .polaroid-hint { font-size: 7.5px; }
-    .polaroid-scatter { gap: 10px; }
-    .polaroid:nth-child(n) { margin: 5px !important; rotate: 0deg !important; }
+    .polaroid { 
+      width: 110px;      /* Уменьшенный размер для экранов телефонов */
+      height: 135px; 
+      padding: 6px 6px 12px; 
+      box-shadow: 0 4px 10px rgba(28, 43, 57, 0.12);
+    }
+    .polaroid-caption { font-size: 8px; bottom: 4px; }
+
+    /* Возвращаем индивидуальные наклоны и наезды друг на друга на мобильных */
+    .polaroid:nth-child(1) { rotate: -6deg; margin: 0 -12px 10px 0; }
+    .polaroid:nth-child(2) { rotate: 4deg; margin: -4px -8px 0 0; z-index: 2; }
+    .polaroid:nth-child(3) { rotate: -3deg; margin: 12px -6px 0 0; z-index: 3; }
+    .polaroid:nth-child(4) { rotate: 6deg; margin: -6px -10px 0 0; z-index: 1; }
+    .polaroid:nth-child(5) { rotate: -4deg; margin: 6px 0 0 0; z-index: 2; }
   }
 
   /* HERO */
@@ -638,10 +648,15 @@
 
   <div class="polaroid-scatter">
 
+  <div class="polaroid-scatter">
+
   <!-- Карточка 1 -->
   <div class="polaroid">
     <div class="polaroid-frame">
-      <img src="photo1index.jpg" alt="Мое фото">
+      <!-- Ссылка ведет на то же самое фото -->
+      <a href="photo1index.jpg" data-lightbox="travel-gallery" data-title="Мое фото">
+        <img src="photo1index.jpg" alt="Мое фото">
+      </a>
     </div>
     <div class="polaroid-caption"></div>  
   </div>
@@ -649,23 +664,32 @@
   <!-- Карточка 2 -->
   <div class="polaroid">
     <div class="polaroid-frame">
-      <img src="photo2index.jpg" alt="Деревушка в Эльзасе">
+      <a href="photo2index.jpg" data-lightbox="travel-gallery" data-title="Деревушка в Эльзасе">
+        <img src="photo2index.jpg" alt="Деревушка в Эльзасе">
+      </a>
     </div>
     <div class="polaroid-caption"></div> 
   </div>
 
+  <div class="polaroid-scatter">
+
   <!-- Карточка 3 -->
   <div class="polaroid">
     <div class="polaroid-frame">
-      <img src="photo3index.jpg" alt="Красиво">
+      <!-- Ссылка ведет на то же самое фото -->
+      <a href="photo3index.jpg" data-lightbox="travel-gallery" data-title="Мое фото">
+        <img src="photo1index.jpg" alt="красиво">
+      </a>
     </div>
-    <div class="polaroid-caption"></div> 
+    <div class="polaroid-caption"></div>  
   </div>
 
   <!-- Карточка 4 -->
   <div class="polaroid">
     <div class="polaroid-frame">
-      <img src="photo4index.jpg" alt="Мост в Будапеште">
+      <a href="photo4index.jpg" data-lightbox="travel-gallery" data-title="Деревушка в Эльзасе">
+        <img src="photo2index.jpg" alt="мост">
+      </a>
     </div>
     <div class="polaroid-caption"></div> 
   </div>
@@ -673,7 +697,9 @@
   <!-- Карточка 5 -->
   <div class="polaroid">
     <div class="polaroid-frame">
-      <img src="photo5index.jpg" alt="Фото с Тура">
+      <a href="photo4index.jpg" data-lightbox="travel-gallery" data-title="Деревушка в Эльзасе">
+        <img src="photo5index.jpg" alt="тур">
+      </a>
     </div>
     <div class="polaroid-caption"></div> 
   </div>
@@ -802,6 +828,8 @@
   navOverlay.addEventListener('click', closeNav);
   navPanel.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
 </script>
-
+  
+<script src="https://cloudflare.com"></script>
+  
 </body>
 </html>
