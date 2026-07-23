@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <link rel="stylesheet" href="https://cloudflare.com">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ПЕК — Авторские путешествия</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ПЕК — Авторские путешествия</title>
+  <link rel="preconnect" href="https://googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -820,30 +819,34 @@
   
 <script src="https://cloudflare.com"></script>
 
-  <script>
-  document.querySelectorAll('.polaroid').forEach(card => {
-    card.addEventListener('click', function(e) {
-      // КРИТИЧЕСКИЙ МОМЕНТ: эта строчка запрещает браузеру 
-      // открывать картинку в новом окне, даже если ссылки всё еще в коде
-      e.preventDefault(); 
-      
-      const isActive = this.classList.contains('active');
-      
-      // Закрываем все остальные открытые карточки
-      document.querySelectorAll('.polaroid').forEach(c => c.classList.remove('active'));
-      
-      // Если текущая карточка не была увеличена — увеличиваем её
-      if (!isActive) {
-        this.classList.add('active');
+ <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.polaroid');
+    
+    cards.forEach(card => {
+      card.addEventListener('click', function(e) {
+        // Жестко блокируем стандартное поведение браузера (уход со страницы)
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const isActive = this.classList.contains('active');
+        
+        // Закрываем все остальные карточки
+        cards.forEach(c => c.classList.remove('active'));
+        
+        // Переключаем текущую
+        if (!isActive) {
+          this.classList.add('active');
+        }
+      });
+    });
+
+    // Клик мимо карточек возвращает их в исходный размер
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.polaroid')) {
+        cards.forEach(c => c.classList.remove('active'));
       }
     });
-  });
-
-  // Если кликнуть в пустое место сайта — открытая карточка уменьшится обратно
-  document.addEventListener('click', function(e) {
-    if (!e.target.closest('.polaroid')) {
-      document.querySelectorAll('.polaroid').forEach(c => c.classList.remove('active'));
-    }
   });
 </script>
   
