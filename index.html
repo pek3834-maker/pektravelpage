@@ -138,7 +138,12 @@
     flex-wrap: wrap;
     gap: 20px; /* Добавили автоматический зазор между большими карточками */
   }
-
+  
+.polaroid.active {
+  transform: scale(1.3) rotate(0deg) !important; /* Увеличиваем на 30% */
+  z-index: 999 !important;                       /* Выносим поверх остальных фото */
+  box-shadow: 0 20px 40px rgba(28, 43, 57, 0.35); /* Усиливаем тень */
+}
   .polaroid {
     background: #fff;
     padding: 20px 20px 32px; 
@@ -646,17 +651,12 @@
     </div>
   </section>
 
-  <div class="polaroid-scatter">
-
-  <div class="polaroid-scatter">
+ <div class="polaroid-scatter">
 
   <!-- Карточка 1 -->
   <div class="polaroid">
     <div class="polaroid-frame">
-      <!-- Ссылка ведет на то же самое фото -->
-      <a href="photo1index.jpg" data-lightbox="travel-gallery" data-title="Мое фото">
-        <img src="photo1index.jpg" alt="Мое фото">
-      </a>
+      <img src="photo1index.jpg" alt="Мое фото">
     </div>
     <div class="polaroid-caption"></div>  
   </div>
@@ -664,22 +664,15 @@
   <!-- Карточка 2 -->
   <div class="polaroid">
     <div class="polaroid-frame">
-      <a href="photo2index.jpg" data-lightbox="travel-gallery" data-title="Деревушка в Эльзасе">
-        <img src="photo2index.jpg" alt="Деревушка в Эльзасе">
-      </a>
+      <img src="photo2index.jpg" alt="Деревушка в Эльзасе">
     </div>
     <div class="polaroid-caption"></div> 
   </div>
 
-  <div class="polaroid-scatter">
-
   <!-- Карточка 3 -->
   <div class="polaroid">
     <div class="polaroid-frame">
-      <!-- Ссылка ведет на то же самое фото -->
-      <a href="photo3index.jpg" data-lightbox="travel-gallery" data-title="Мое фото">
-        <img src="photo1index.jpg" alt="красиво">
-      </a>
+      <img src="photo3index.jpg" alt="Красиво">
     </div>
     <div class="polaroid-caption"></div>  
   </div>
@@ -687,9 +680,7 @@
   <!-- Карточка 4 -->
   <div class="polaroid">
     <div class="polaroid-frame">
-      <a href="photo4index.jpg" data-lightbox="travel-gallery" data-title="Деревушка в Эльзасе">
-        <img src="photo2index.jpg" alt="мост">
-      </a>
+      <img src="photo4index.jpg" alt="Мост">
     </div>
     <div class="polaroid-caption"></div> 
   </div>
@@ -697,9 +688,7 @@
   <!-- Карточка 5 -->
   <div class="polaroid">
     <div class="polaroid-frame">
-      <a href="photo4index.jpg" data-lightbox="travel-gallery" data-title="Деревушка в Эльзасе">
-        <img src="photo5index.jpg" alt="тур">
-      </a>
+      <img src="photo5index.jpg" alt="Тур">
     </div>
     <div class="polaroid-caption"></div> 
   </div>
@@ -830,6 +819,30 @@
 </script>
   
 <script src="https://cloudflare.com"></script>
+
+    <script>
+  document.querySelectorAll('.polaroid').forEach(card => {
+    card.addEventListener('click', function(e) {
+      // Проверяем, активна ли уже выбранная карточка
+      const isActive = this.classList.contains('active');
+      
+      // Снимаем активность со всех остальных карточек на странице
+      document.querySelectorAll('.polaroid').forEach(c => c.classList.remove('active'));
+      
+      // Если карточка не была активной, делаем её активной
+      if (!isActive) {
+        this.classList.add('active');
+      }
+    });
+  });
+
+  // Если кликнуть в любое пустое место сайта — карточка уменьшится обратно
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.polaroid')) {
+      document.querySelectorAll('.polaroid').forEach(c => c.classList.remove('active'));
+    }
+  });
+</script>
   
 </body>
 </html>
