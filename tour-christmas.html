@@ -258,54 +258,62 @@
     .day-num { width: 34px; height: 34px; font-size: 11px; top: 22px; }
   }
 
+/* POLAROID (single, inline) */
 .polaroid-inline {
   background: #fff;
-  /* Увеличили нижний паддинг до 44px, чтобы освободить место для подписи под фото */
-  padding: 9px 9px 44px;
+  /* Увеличен нижний паддинг до 46px для текста под фото */
+  padding: 10px 10px 46px;
   box-shadow: 0 8px 20px rgba(28, 43, 57, 0.14), 0 2px 5px rgba(28, 43, 57, 0.08);
   width: 100%;
-  max-width: 240px;
-  margin: 22px auto 26px;
+  max-width: 260px; /* Немного увеличили для лучшей пропорции на странице */
+  margin: 24px auto;
   position: relative;
   transition: transform 0.3s ease;
+  box-sizing: border-box;
 }
-.polaroid-inline:hover { transform: scale(1.03) rotate(0deg) !important; }
-.polaroid-inline.rot-l { rotate: -3.5deg; }
-.polaroid-inline.rot-r { rotate: 3deg; }
 
+/* Эффекты при наведении мыши */
+.polaroid-inline:hover { 
+  transform: scale(1.04) rotate(0deg) !important; 
+  box-shadow: 0 12px 28px rgba(28, 43, 57, 0.2);
+  z-index: 10;
+}
+
+/* Классы наклона карточек */
+.polaroid-inline.rot-l { transform: rotate(-2.5deg); }
+.polaroid-inline.rot-r { transform: rotate(2.5deg); }
+
+/* Рамка под снимок */
 .polaroid-inline .polaroid-frame {
   width: 100%;
-  aspect-ratio: 1 / 1.05;
+  aspect-ratio: 1 / 1; /* Классический квадратный снимок Polaroid */
   background:
     repeating-linear-gradient(45deg, rgba(92,122,110,0.08) 0 10px, transparent 10px 20px),
     var(--paper-dim);
-  border: 1px dashed rgba(42, 33, 24, 0.28);
+  border: 1px dashed rgba(42, 33, 24, 0.18);
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
   overflow: hidden;
 }
+
+/* Изображение внутри рамки */
 .polaroid-inline .polaroid-frame img {
-  width: 100%; height: 100%; object-fit: cover; display: block;
-}
-.polaroid-inline .polaroid-hint {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  line-height: 1.6;
-  color: var(--text-soft);
-  padding: 10px;
-  opacity: 0.75;
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  display: block;
 }
 
-/* ИСПРАВЛЕНО: Подпись снимка типа под фото */
+/* Исправленная подпись строго ПОД фотографией */
 .polaroid-inline .polaroid-caption {
-  /* Убрали абсолютное позиционирование, чтобы текст не налезал на картинку */
-  position: relative; 
-  margin-top: 12px; /* Отступ от нижнего края рамки фотографии */
+  position: absolute;
+  bottom: 12px; /* Фиксированное положение на нижнем белом поле */
+  left: 10px; 
+  right: 10px;
   font-family: 'Fraunces', serif;
   font-style: italic;
-  font-size: 14px; /* Чуть увеличили для лучшей читаемости */
+  font-size: 15px; /* Слегка увеличили для читаемости */
   color: var(--text-soft);
   text-align: center;
   line-height: 1.2;
@@ -365,7 +373,7 @@
       <p>Площадь Вёрёшмарти — старейшая и самая красивая ярмарка Будапешта, работает с 1998 года. 150+ деревянных домиков, гигантская ёлка, кафе Gerbeaud рядом.</p>
     </div>
 
-   <div class="polaroid"> 
+  <div class="polaroid-inline rot-l"> 
   <div class="polaroid-frame"> 
     <img src="img/photo3xmas.jpg" alt="Будапешт зимой"> 
   </div> 
@@ -410,7 +418,7 @@
       <p>Вылет в Берлин. Заселяемся в отель, вечером — первая прогулка по рождественскому Берлину.</p>
     </div>
 
-    <div class="polaroid"> 
+<div class="polaroid-inline rot-r"> 
   <div class="polaroid-frame"> 
     <img src="img/photo2xmas.jpg" alt="Берлин зимой"> 
   </div> 
@@ -472,13 +480,12 @@
     <p style="margin-top: 8px;">Оплачивается отдельно: авиабилеты, визовый сбор и сбор визового центра.</p>
   </div>
 
-  <div class="polaroid-inline rot-l">
-    <div class="polaroid-frame">
-      <img src="img/photo4xmas.jpg" alt="Группа">
-      <div class="polaroid-hint">images/<br>group-final.jpg</div>
-    </div>
-    <div class="polaroid-caption">До встречи в туре</div>
-  </div>
+<div class="polaroid-inline rot-l"> 
+  <div class="polaroid-frame"> 
+    <img src="img/photo4xmas.jpg" alt="Наша группа"> 
+  </div> 
+  <div class="polaroid-caption">До встречи в туре!</div> 
+</div>
 
   <div class="perf"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
 
