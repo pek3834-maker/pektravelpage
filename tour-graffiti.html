@@ -55,47 +55,58 @@
   }
   .back:hover { color: var(--stamp-red); }
 
-  /* Контейнер для центрирования кнопки внизу страницы */
-.back-button-container {
-  text-align: center;
-  margin: 40px auto 20px; /* Отступы сверху и снизу */
-  padding: 0 15px;
-}
-
-/* Стили самой кнопки */
-.btn-back {
-  background-color: transparent;
-  color: var(--text-soft, #4a4a4a); /* Цвет текста в стиле сайта */
-  border: 1px solid var(--text-soft, #4a4a4a); /* Тонкая рамка */
-  padding: 12px 28px;
-  font-family: inherit; /* Наследует шрифт сайта */
-  font-size: 15px;
-  font-weight: 500;
+/* ПЛАВАЮЩАЯ КНОПКА НАЗАД */
+.floating-back-btn {
+  position: fixed;
+  bottom: 25px; /* Отступ от нижнего края экрана */
+  left: 25px;   /* Отступ от левого края экрана */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* Делает кнопку идеально круглой */
+  background-color: #ffffff; /* Белый глянцевый фон */
+  color: #2b2b2b; /* Цвет стрелки */
+  border: 1px solid rgba(0, 0, 0, 0.08); /* Едва заметная рамка */
+  box-shadow: 0 4px 14px rgba(28, 43, 57, 0.16); /* Мягкая тень */
   cursor: pointer;
-  border-radius: 4px; /* Легкое скругление углов */
-  transition: all 0.3s ease; /* Плавная анимация */
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 8px; /* Расстояние между стрелочкой и текстом */
+  justify-content: center;
+  z-index: 999; /* Выводит кнопку поверх всех элементов сайта */
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Эффект при наведении мыши */
-.btn-back:hover {
-  background-color: var(--text-soft, #4a4a4a); /* Кнопка закрашивается */
-  color: #ffffff; /* Текст становится белым */
-  transform: translateY(-2px); /* Кнопка слегка приподнимается */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Появляется мягкая тень */
-}
-
-/* Небольшая анимация стрелочки при наведении */
-.btn-back:hover .arrow {
-  transform: translateX(-4px); /* Стрелочка сдвигается левее */
-}
-
-.btn-back .arrow {
+/* Иконка стрелочки внутри кнопки */
+.floating-back-btn .back-icon {
+  width: 20px;
+  height: 20px;
   transition: transform 0.3s ease;
-  font-size: 18px;
-  line-height: 1;
+}
+
+/* Эффекты при наведении мыши */
+.floating-back-btn:hover {
+  background-color: #2b2b2b; /* Фон становится темным */
+  color: #ffffff; /* Стрелка становится белой */
+  transform: scale(1.08); /* Кнопка слегка увеличивается */
+  box-shadow: 0 6px 20px rgba(28, 43, 57, 0.24); /* Тень становится глубже */
+}
+
+/* Анимация смещения стрелки влево при наведении */
+.floating-back-btn:hover .back-icon {
+  transform: translateX(-2px);
+}
+
+/* Оптимизация для мобильных устройств, чтобы кнопка не перекрывала контент */
+@media (max-width: 480px) {
+  .floating-back-btn {
+    bottom: 20px;
+    left: 20px;
+    width: 44px;
+    height: 44px;
+  }
+  .floating-back-btn .back-icon {
+    width: 18px;
+    height: 18px;
+  }
 }
 
 
@@ -535,11 +546,14 @@
 
 </div>
 
-<div class="back-button-container">
-  <!-- JavaScript встроен прямо в кнопку: window.history.back() возвращает на прошлую страницу -->
-  <button onclick="window.history.back()" class="btn-back">
-    <span class="arrow">←</span> Вернуться назад
-  </button>
+<!-- Плавающая кнопка возврата назад -->
+<button onclick="window.history.back()" class="floating-back-btn" title="Вернуться назад">
+  <svg class="back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="19" y1="12" x2="5" y2="12"></line>
+    <polyline points="12 19 5 12 12 5"></polyline>
+  </svg>
+</button>
+
 </div>
 
   
