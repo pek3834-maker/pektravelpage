@@ -49,9 +49,64 @@
     z-index: 2;
   }
 
+  /* ПЛАВАЮЩАЯ КНОПКА ВВЕРХ */
+.floating-top-btn {
+  position: fixed;
+  bottom: 25px; /* На одном уровне с вашей кнопкой "Назад" */
+  right: 25px;  /* Размещаем строго в правом углу */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* Идеальный круг */
+  background-color: #ffffff; /* Белый фон */
+  color: #2b2b2b; /* Цвет стрелочки */
+  border: 1px solid rgba(0, 0, 0, 0.08); /* Легкая рамка */
+  box-shadow: 0 4px 14px rgba(28, 43, 57, 0.16); /* Фирменная мягкая тень */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999; /* Поверх всего контента, но под открытым меню */
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Иконка стрелочки */
+.floating-top-btn .top-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+/* Эффекты при наведении */
+.floating-top-btn:hover {
+  background-color: #2b2b2b; /* Кнопка темнеет */
+  color: #ffffff; /* Стрелка становится белой */
+  transform: scale(1.08); /* Чуть увеличивается */
+  box-shadow: 0 6px 20px rgba(28, 43, 57, 0.24); /* Тень становится глубже */
+}
+
+/* Анимация стрелочки при наведении */
+.floating-top-btn:hover .top-icon {
+  transform: translateY(-2px); /* Стрелка плавно дергается вверх */
+}
+
+/* Оптимизация для мобильных экранов */
+@media (max-width: 480px) {
+  .floating-top-btn {
+    bottom: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+  }
+  .floating-top-btn .top-icon {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+
   /* NAV */
   .nav-bar {
-  position: fixed; /* ИСПРАВЛЕНО: теперь кнопка зафиксирована на экране */
+  position: absolute; /* ИСПРАВЛЕНО: теперь кнопка зафиксирована на экране */
   top: 24px;       /* Отступ от верхнего края экрана */
   right: 24px;     /* Отступ от правого края экрана */
   z-index: 10000;  /* ИСПРАВЛЕНО: выводим на самый передний план, чтобы контент не перекрывал полоски */
@@ -868,6 +923,15 @@
     });
   });
 </script>
+
+  <!-- Плавающая кнопка Вверх -->
+<button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="floating-top-btn" title="Наверх">
+  <svg class="top-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="12" y1="19" x2="12" y2="5"></line>
+    <polyline points="5 12 12 5 19 12"></polyline>
+  </svg>
+</button>
+
   
 </body>
 </html>
