@@ -55,6 +55,59 @@
   }
   .back:hover { color: var(--stamp-red); }
 
+  .floating-back-btn {
+  position: fixed;
+  bottom: 25px; /* Отступ от нижнего края экрана */
+  left: 25px;   /* Отступ от левого края экрана */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* Делает кнопку идеально круглой */
+  background-color: #ffffff; /* Белый глянцевый фон */
+  color: #2b2b2b; /* Цвет стрелки */
+  border: 1px solid rgba(0, 0, 0, 0.08); /* Едва заметная рамка */
+  box-shadow: 0 4px 14px rgba(28, 43, 57, 0.16); /* Мягкая тень */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999; /* Выводит кнопку поверх всех элементов сайта */
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Иконка стрелочки внутри кнопки */
+.floating-back-btn .back-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+/* Эффекты при наведении мыши */
+.floating-back-btn:hover {
+  background-color: #2b2b2b; /* Фон становится темным */
+  color: #ffffff; /* Стрелка становится белой */
+  transform: scale(1.08); /* Кнопка слегка увеличивается */
+  box-shadow: 0 6px 20px rgba(28, 43, 57, 0.24); /* Тень становится глубже */
+}
+
+/* Анимация смещения стрелки влево при наведении */
+.floating-back-btn:hover .back-icon {
+  transform: translateX(-2px);
+}
+
+/* Оптимизация для мобильных устройств, чтобы кнопка не перекрывала контент */
+@media (max-width: 480px) {
+  .floating-back-btn {
+    bottom: 20px;
+    left: 20px;
+    width: 44px;
+    height: 44px;
+  }
+  .floating-back-btn .back-icon {
+    width: 18px;
+    height: 18px;
+  }
+}
+
   /* MAIN PHOTO - large polaroid */
   .main-photo {
     background: #fff;
@@ -590,6 +643,13 @@
     });
   });
 </script>
+  
+  <button onclick="window.history.back()" class="floating-back-btn" title="Вернуться назад">
+  <svg class="back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="19" y1="12" x2="5" y2="12"></line>
+    <polyline points="12 19 5 12 12 5"></polyline>
+  </svg>
+</button>
 
 </body>
 </html>
