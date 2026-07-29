@@ -65,6 +65,40 @@
     line-height: 1.6;
   }
 
+  /* FOOTER */
+  footer { padding: 40px 0 56px; text-align: center; }
+  .footer-line {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink);
+    margin-bottom: 22px;
+    line-height: 1.4;
+  }
+  .contact-btn {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: var(--ink); color: var(--paper);
+    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 15px;
+    padding: 15px 28px; border-radius: 40px; text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .contact-btn:hover { background: var(--stamp-red); transform: translateY(-2px); }
+  .footer-sub {
+    margin-top: 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--text-soft);
+    opacity: 0.75;
+  }
+
+  @media (max-width: 420px) {
+    .ticket { grid-template-columns: 1fr; }
+    .food-grid { grid-template-columns: 1fr; gap: 18px; }
+    .day { padding-left: 46px; }
+    .day-num { width: 34px; height: 34px; font-size: 11px; top: 22px; }
+  }
+
+
   /* TICKET STRIP - key facts */
   .ticket {
     margin-top: 24px;
@@ -382,7 +416,7 @@
 
 
     <footer>
-    <p class="footer-line">Маршрут живой и может чуть меняться под настроение группы, погоду и расписание ярмарок в конкретные даты.<br>Но вся рождественская магия — точно успеем.</p>
+    <p class="footer-line">Маршрут живой и может чуть меняться под настроение группы, погоду и расписание ярмарок в конкретные даты.<br></p>
     <a href="https://t.me/kirillpekov" class="contact-btn">Написать в Telegram</a>
     <p class="footer-sub">@kirillpekov · ПЕК: пить, есть и колесить</p>
   </footer>
