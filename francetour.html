@@ -379,33 +379,13 @@
     </div>
   </div>
 
-  <footer>
-    <p class="footer-line">Франция без спешки. <br><span style="font-size: 16px;">Лион • Париж</span></p>
-    <p class="footer-sub">Путешествие с комфортным ритмом</p>
+
+
+    <footer>
+    <p class="footer-line">Маршрут живой и может чуть меняться под настроение группы, погоду и расписание ярмарок в конкретные даты.<br>Но вся рождественская магия — точно успеем.</p>
+    <a href="https://t.me/kirillpekov" class="contact-btn">Написать в Telegram</a>
+    <p class="footer-sub">@kirillpekov · ПЕК: пить, есть и колесить</p>
   </footer>
-
-</div>
-
-<div class="download-bar">
-  <button class="download-btn" onclick="downloadFile()">
-    📥 Скачать HTML
-  </button>
-</div>
-
-<script>
-  function downloadFile() {
-    const htmlContent = document.documentElement.outerHTML;
-    const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'france-bez-speshki-updated.html';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  }
-</script>
 
 </body>
 </html>
