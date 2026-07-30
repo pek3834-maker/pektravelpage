@@ -42,11 +42,109 @@
 
   .wrap { max-width: 640px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2; }
 
+  /* ===== BACK LINK (в шапке) ===== */
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-soft);
+    text-decoration: none;
+    padding: 22px 0 0;
+  }
+  .back:hover { color: var(--stamp-red); }
+
+  /* ===== ПЛАВАЮЩАЯ КНОПКА НАЗАД ===== */
+  .floating-back-btn {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    color: #2b2b2b;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 14px rgba(28, 43, 57, 0.16);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .floating-back-btn .back-icon {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+  }
+  .floating-back-btn:hover {
+    background-color: #2b2b2b;
+    color: #ffffff;
+    transform: scale(1.08);
+    box-shadow: 0 6px 20px rgba(28, 43, 57, 0.24);
+  }
+  .floating-back-btn:hover .back-icon {
+    transform: translateX(-2px);
+  }
+  @media (max-width: 480px) {
+    .floating-back-btn {
+      bottom: 20px;
+      left: 20px;
+      width: 44px;
+      height: 44px;
+    }
+    .floating-back-btn .back-icon {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  /* ===== ПОЛЯРОИД ===== */
+  .polaroid-inline {
+    background: #fff;
+    padding: 9px 9px 30px;
+    box-shadow: 0 8px 20px rgba(28, 43, 57, 0.14), 0 2px 5px rgba(28, 43, 57, 0.08);
+    width: 100%;
+    max-width: 240px;
+    margin: 22px auto 26px;
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+  .polaroid-inline:hover { transform: scale(1.03) rotate(0deg) !important; }
+  .polaroid-inline.rot-l { rotate: -3.5deg; }
+  .polaroid-inline.rot-r { rotate: 3deg; }
+
+  .polaroid-inline .polaroid-frame {
+    width: 100%;
+    aspect-ratio: 1 / 1.05;
+    background:
+      repeating-linear-gradient(45deg, rgba(92,122,110,0.08) 0 10px, transparent 10px 20px),
+      var(--paper-dim);
+    border: 1px dashed rgba(42, 33, 24, 0.28);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+  }
+  .polaroid-inline .polaroid-frame img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .polaroid-inline .polaroid-caption {
+    position: absolute;
+    bottom: 8px; left: 10px; right: 10px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--text-soft);
+    text-align: center;
+  }
+
   /* HERO */
-  .hero { padding: 40px 0 32px; }
-
+  .hero { padding: 20px 0 32px; }
   .hero-flags { font-size: 30px; letter-spacing: 0.08em; margin-bottom: 18px; }
-
   .hero h1 {
     font-family: 'Fraunces', serif;
     font-weight: 500;
@@ -56,7 +154,6 @@
     color: var(--ink);
   }
   .hero h1 em { font-style: italic; font-weight: 400; color: var(--stamp-red); }
-
   .hero-sub {
     margin-top: 16px;
     font-size: 15.5px;
@@ -65,41 +162,7 @@
     line-height: 1.6;
   }
 
-  /* FOOTER */
-  footer { padding: 40px 0 56px; text-align: center; }
-  .footer-line {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 18px;
-    color: var(--ink);
-    margin-bottom: 22px;
-    line-height: 1.4;
-  }
-  .contact-btn {
-    display: inline-flex; align-items: center; gap: 9px;
-    background: var(--ink); color: var(--paper);
-    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 15px;
-    padding: 15px 28px; border-radius: 40px; text-decoration: none;
-    transition: background 0.2s ease, transform 0.2s ease;
-  }
-  .contact-btn:hover { background: var(--stamp-red); transform: translateY(-2px); }
-  .footer-sub {
-    margin-top: 18px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11.5px;
-    color: var(--text-soft);
-    opacity: 0.75;
-  }
-
-  @media (max-width: 420px) {
-    .ticket { grid-template-columns: 1fr; }
-    .food-grid { grid-template-columns: 1fr; gap: 18px; }
-    .day { padding-left: 46px; }
-    .day-num { width: 34px; height: 34px; font-size: 11px; top: 22px; }
-  }
-
-
-  /* TICKET STRIP - key facts */
+  /* TICKET */
   .ticket {
     margin-top: 24px;
     background: var(--ink);
@@ -149,7 +212,6 @@
     padding: 6px 0 20px;
   }
 
-  /* HIGHLIGHTS */
   .highlights { padding-bottom: 8px; }
   .highlights ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
   .highlights li {
@@ -159,7 +221,6 @@
     content: '✦'; position: absolute; left: 0; top: 1px; color: var(--stamp-red); font-size: 12px;
   }
 
-  /* DAY ENTRIES */
   .days { display: flex; flex-direction: column; gap: 0; }
 
   .day {
@@ -204,7 +265,6 @@
 
   .day p { font-size: 14px; color: var(--text-soft); line-height: 1.6; }
 
-  /* INCLUDED / EXCLUDED */
   .included-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -236,7 +296,6 @@
     font-size: 13.5px; color: var(--text-soft); line-height: 1.4;
   }
 
-  /* FOOTER */
   footer { padding: 40px 0 56px; text-align: center; }
   .footer-line {
     font-family: 'Fraunces', serif;
@@ -246,40 +305,20 @@
     margin-bottom: 22px;
     line-height: 1.4;
   }
+  .contact-btn {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: var(--ink); color: var(--paper);
+    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 15px;
+    padding: 15px 28px; border-radius: 40px; text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .contact-btn:hover { background: var(--stamp-red); transform: translateY(-2px); }
   .footer-sub {
     margin-top: 18px;
     font-family: 'JetBrains Mono', monospace;
     font-size: 11.5px;
     color: var(--text-soft);
     opacity: 0.75;
-  }
-
-  /* DOWNLOAD BUTTON */
-  .download-bar {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 100;
-  }
-  .download-btn {
-    background: var(--stamp-red);
-    color: #fff;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 30px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: transform 0.2s ease, background 0.2s ease;
-  }
-  .download-btn:hover {
-    background: var(--ink);
-    transform: translateY(-2px);
   }
 
   @media (max-width: 420px) {
@@ -293,6 +332,9 @@
 <body>
 
 <div class="wrap">
+
+  <!-- ===== КНОПКА "НАЗАД" В ШАПКЕ ===== -->
+  <a href="/" class="back">← Все туры</a>
 
   <section class="hero">
     <div class="hero-flags">🇫🇷</div>
@@ -330,6 +372,14 @@
       <p>Прилет в Лион, заселение в отель и первое знакомство с городом. Вечером — совместный ужин в традиционном лионском бушоне.</p>
     </div>
 
+    <!-- ПОЛЯРОИД 1 -->
+    <div class="polaroid-inline rot-l">
+      <div class="polaroid-frame">
+        <img src="img/lyon.jpg" alt="Лион" style="background:#D9CFBB; display:flex; align-items:center; justify-content:center; color:var(--text-soft); font-size:14px; font-family:'Fraunces',serif; font-style:italic;">
+      </div>
+      <div class="polaroid-caption">Лион</div>
+    </div>
+
     <div class="day">
       <div class="day-num">2</div>
       <div class="day-city">Лион</div>
@@ -342,6 +392,14 @@
       <div class="day-city">Лион → Париж</div>
       <h3>Франция на вкус</h3>
       <p>Рынок Les Halles Paul Bocuse — мекка для гурманов: сырные лавки, кондитерские, свежайшие продукты. Свободное время, а вечером — скоростной поезд TGV в Париж.</p>
+    </div>
+
+    <!-- ПОЛЯРОИД 2 -->
+    <div class="polaroid-inline rot-r">
+      <div class="polaroid-frame">
+        <img src="img/paris-streets.jpg" alt="Париж" style="background:#D9CFBB; display:flex; align-items:center; justify-content:center; color:var(--text-soft); font-size:14px; font-family:'Fraunces',serif; font-style:italic;">
+      </div>
+      <div class="polaroid-caption">Париж</div>
     </div>
 
     <div class="day">
@@ -365,6 +423,14 @@
       <p>Утро начнём с музея Орсе (импрессионисты — это любовь). Потом лёгкая прогулка мимо Дома инвалидов. А вечером — Эйфелева башня. Без суеты, просто кайф.</p>
     </div>
 
+    <!-- ПОЛЯРОИД 3 -->
+    <div class="polaroid-inline rot-l">
+      <div class="polaroid-frame">
+        <img src="img/etretat.jpg" alt="Этрета" style="background:#D9CFBB; display:flex; align-items:center; justify-content:center; color:var(--text-soft); font-size:14px; font-family:'Fraunces',serif; font-style:italic;">
+      </div>
+      <div class="polaroid-caption">Этрета</div>
+    </div>
+
     <div class="day">
       <div class="day-num">7</div>
       <div class="day-city">Париж → Этрета</div>
@@ -377,6 +443,14 @@
       <div class="day-city">Париж</div>
       <h3>Последний день</h3>
       <p>Шопинг, прощальный ужин и вечерние огни французской столицы.</p>
+    </div>
+
+    <!-- ПОЛЯРОИД 4 -->
+    <div class="polaroid-inline rot-r">
+      <div class="polaroid-frame">
+        <img src="img/group-france.jpg" alt="Группа во Франции" style="background:#D9CFBB; display:flex; align-items:center; justify-content:center; color:var(--text-soft); font-size:14px; font-family:'Fraunces',serif; font-style:italic;">
+      </div>
+      <div class="polaroid-caption">До встречи в туре!</div>
     </div>
 
     <div class="day">
@@ -413,15 +487,21 @@
     </div>
   </div>
 
-
-
-    <footer>
+  <footer>
     <p class="footer-line">Маршрут живой и может чуть меняться под группу и сезон.<br></p>
     <a href="https://t.me/kirillpekov" class="contact-btn">Написать в Telegram</a>
     <p class="footer-sub">@kirillpekov · ПЕК: пить, есть и колесить</p>
   </footer>
 
+</div>
+
+<!-- ===== ПЛАВАЮЩАЯ КНОПКА НАЗАД ===== -->
+<button onclick="window.history.back()" class="floating-back-btn" title="Вернуться назад">
+  <svg class="back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="19" y1="12" x2="5" y2="12"></line>
+    <polyline points="12 19 5 12 12 5"></polyline>
+  </svg>
+</button>
+
 </body>
 </html>
-
-
