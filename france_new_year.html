@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Париж и Эльзас на Новый год — ПЕК</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1C2B39;
+            --paper: #F5EFE0;
+            --paper-dim: #ECE4D0;
+            --stamp-red: #B8442F;
+            --atlas-green: #5C7A6E;
+            --text: #2A2118;
+            --text-soft: #6B5F4E;
+            --line: rgba(42, 33, 24, 0.16);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--paper);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.035;
+            z-index: 1;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        .wrap {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .back {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-soft);
+            text-decoration: none;
+            padding: 22px 0 0;
+        }
+        .back:hover {
+            color: var(--stamp-red);
+        }
+
+        .floating-back-btn {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #ffffff;
+            color: #2b2b2b;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 14px rgba(28, 43, 57, 0.16);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .floating-back-btn .back-icon {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+        .floating-back-btn:hover {
+            background-color: #2b2b2b;
+            color: #ffffff;
+            transform: scale(1.08);
+            box-shadow: 0 6px 20px rgba(28, 43, 57, 0.24);
+        }
+        .floating-back-btn:hover .back-icon {
+            transform: translateX(-2px);
+        }
+        @media (max-width: 480px) {
+            .floating-back-btn {
+                bottom: 20px;
+                left: 20px;
+                width: 44px;
+                height: 44px;
+            }
+            .floating-back-btn .back-icon {
+                width: 18px;
+                height: 18px;
+            }
+        }
+
+        .polaroid-inline {
+            background: #fff;
+            padding: 9px 9px 30px;
+            box-shadow: 0 8px 20px rgba(28, 43, 57, 0.14), 0 2px 5px rgba(28, 43, 57, 0.08);
+            width: 100%;
+            max-width: 240px;
+            margin: 22px auto 26px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        .polaroid-inline:hover {
+            transform: scale(1.03) rotate(0deg) !important;
+        }
+        .polaroid-inline.rot-l {
+            rotate: -3.5deg;
+        }
+        .polaroid-inline.rot-r {
+            rotate: 3deg;
+        }
+
+        .polaroid-inline .polaroid-frame {
+            width: 100%;
+            aspect-ratio: 1 / 1.05;
+            background:
+                repeating-linear-gradient(45deg, rgba(92, 122, 110, 0.08) 0 10px, transparent 10px 20px),
+                var(--paper-dim);
+            border: 1px dashed rgba(42, 33, 24, 0.28);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+        .polaroid-inline .polaroid-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .polaroid-inline .polaroid-caption {
+            position: absolute;
+            bottom: 8px;
+            left: 10px;
+            right: 10px;
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-size: 13px;
+            color: var(--text-soft);
+            text-align: center;
+        }
+
+        .hero {
+            padding: 20px 0 32px;
+        }
+        .hero-flags {
+            font-size: 30px;
+            letter-spacing: 0.08em;
+            margin-bottom: 18px;
+        }
+        .hero h1 {
+            font-family: 'Fraunces', serif;
+            font-weight: 500;
+            font-size: clamp(30px, 8vw, 42px);
+            line-height: 1.14;
+            letter-spacing: -0.01em;
+            color: var(--ink);
+        }
+        .hero h1 em {
+            font-style: italic;
+            font-weight: 400;
+            color: var(--stamp-red);
+        }
+        .hero-sub {
+            margin-top: 16px;
+            font-size: 15.5px;
+            color: var(--text-soft);
+            max-width: 480px;
+            line-height: 1.6;
+        }
+        .hero-sub+.hero-sub {
+            margin-top: 12px;
+        }
+
+        .ticket {
+            margin-top: 24px;
+            background: var(--ink);
+            color: var(--paper);
+            border-radius: 6px;
+            padding: 18px 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px 12px;
+            position: relative;
+            overflow: hidden;
+        }
+        .ticket::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background-image: repeating-linear-gradient(to bottom, rgba(245, 239, 224, 0.4) 0 4px, transparent 4px 9px);
+        }
+        .ticket-item b {
+            display: block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9.5px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            opacity: 0.6;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+        .ticket-item span {
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .ticket-item.price span {
+            font-family: 'Fraunces', serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: #E8B4A8;
+        }
+
+        .perf {
+            display: flex;
+            gap: 7px;
+            padding: 26px 0;
+            overflow: hidden;
+        }
+        .perf span {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--paper-dim);
+            border: 1px solid var(--line);
+            flex-shrink: 0;
+        }
+
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--atlas-green);
+            padding: 6px 0 20px;
+        }
+
+        .highlights {
+            padding-bottom: 8px;
+        }
+        .highlights ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+        }
+        .highlights li {
+            font-size: 14.5px;
+            color: var(--text);
+            padding-left: 22px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .highlights li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            top: 1px;
+            color: var(--stamp-red);
+            font-size: 12px;
+        }
+
+        .days {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .day {
+            position: relative;
+            padding: 22px 0 22px 54px;
+            border-bottom: 1px dashed var(--line);
+        }
+        .day:last-child {
+            border-bottom: none;
+        }
+
+        .day-num {
+            position: absolute;
+            left: 0;
+            top: 22px;
+            width: 40px;
+            height: 40px;
+            border: 1.5px solid var(--ink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--ink);
+            background: var(--paper);
+            flex-shrink: 0;
+        }
+
+        .day-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: var(--text-soft);
+            opacity: 0.7;
+            margin-left: 6px;
+            font-weight: 400;
+        }
+
+        .day-city {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10.5px;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--atlas-green);
+            margin-bottom: 5px;
+        }
+
+        .day h3 {
+            font-family: 'Fraunces', serif;
+            font-weight: 500;
+            font-size: 18.5px;
+            color: var(--ink);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .day p {
+            font-size: 14px;
+            color: var(--text-soft);
+            line-height: 1.6;
+        }
+
+        .food-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+        .food-col b {
+            display: block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--atlas-green);
+            margin-bottom: 10px;
+        }
+        .food-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .food-col li {
+            font-size: 13px;
+            color: var(--text-soft);
+            line-height: 1.4;
+        }
+
+        .included-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        @media(min-width: 500px) {
+            .included-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .card-box {
+            background: var(--paper-dim);
+            border-radius: 6px;
+            padding: 20px;
+            border-top: 3px solid var(--atlas-green);
+        }
+        .card-box.extra {
+            border-top-color: var(--stamp-red);
+        }
+
+        .card-box h4 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ink);
+            margin-bottom: 14px;
+        }
+        .card-box ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .card-box li {
+            font-size: 13.5px;
+            color: var(--text-soft);
+            line-height: 1.4;
+        }
+
+        .note {
+            background: var(--paper-dim);
+            border-left: 3px solid var(--stamp-red);
+            padding: 16px 18px;
+            border-radius: 0 4px 4px 0;
+            margin: 4px 0 0;
+        }
+        .note p {
+            font-size: 13.5px;
+            color: var(--text-soft);
+            line-height: 1.55;
+        }
+
+        footer {
+            padding: 40px 0 56px;
+            text-align: center;
+        }
+        .footer-line {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-size: 18px;
+            color: var(--ink);
+            margin-bottom: 22px;
+            line-height: 1.4;
+        }
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            background: var(--ink);
+            color: var(--paper);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 15px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+        .contact-btn:hover {
+            background: var(--stamp-red);
+            transform: translateY(-2px);
+        }
+        .footer-sub {
+            margin-top: 18px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11.5px;
+            color: var(--text-soft);
+            opacity: 0.75;
+        }
+
+        @media (max-width: 420px) {
+            .ticket {
+                grid-template-columns: 1fr;
+            }
+            .day {
+                padding-left: 46px;
+            }
+            .day-num {
+                width: 34px;
+                height: 34px;
+                font-size: 11px;
+                top: 22px;
+            }
+            .food-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrap">
+
+        <a href="/" class="back">← Все туры</a>
+
+        <section class="hero">
+            <div class="hero-flags">🇫🇷🎄</div>
+            <h1>Париж и Эльзас <em>на Новый год</em></h1>
+
+            <p class="hero-sub">
+                Есть города, которые созданы для праздника. Париж — один из них. А есть места, где хочется замедлиться. Эльзас — именно такое.
+            </p>
+            <p class="hero-sub">
+                Мы начнём с Парижа: огни, шампанское, новогодняя ночь у Эйфелевой башни. А потом уедем в Эльзас — туда, где пахнет глинтвейном и свежей выпечкой, где фахверковые дома укрыты снегом, а виноградники уходят в туман.
+            </p>
+            <p class="hero-sub">
+                Никакой суеты. Никаких толп. Только мы, маленькая компания, и две абсолютно разные Франции в одной поездке.
+            </p>
+
+            <div class="ticket">
+                <div class="ticket-item"><b>Даты</b><span>26 дек – 3 янв</span></div>
+                <div class="ticket-item"><b>Длительность</b><span>9 дней / 8 ночей</span></div>
+                <div class="ticket-item"><b>Группа</b><span>до 8 человек</span></div>
+                <div class="ticket-item price"><b>Стоимость</b><span>2 000 €</span></div>
+            </div>
+        </section>
+
+        <div class="polaroid-inline rot-l">
+            <div class="polaroid-frame">
+                <img src="img/paris-newyear.jpg" alt="Париж новогодний" style="background:#D9CFBB; display:flex; align-items:center; justify-content:center; color:var(--text-soft); font-size:14px; font-family:'Fraunces',serif; font-style:italic;">
+            </div>
+            <div class="polaroid-caption">Париж в новогоднюю ночь</div>
+        </div>
+
+        <div class="section-label">✨ Главные впечатления</div>
+        <div class="highlights">
+            <ul>
+                <li>Встреча Нового года в Париже — шампанское, огни и Эйфелева башня в полночь</li>
+                <li>Прогулка по Монмартру и Сакре-Кёр</li>
+                <li>Страсбург — рождественская столица Европы</li>
+                <li>Кольмар — сказочный город, как из фильма «Красавица и чудовище»</li>
+                <li>Дегустация эльзасских вин в горах Вогезов</li>
+            </ul>
+        </div>
+
+        <div class="perf"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+        <div class="section-label">📅 Программа по дням</div>
+
+        <div class="days">
+
+            <div class="day">
+                <div class="day-num">1</div>
+                <div class="day-city">Париж</div>
+                <h3>Первое знакомство <span class="day-date">26 дек</span></h3>
+                <p>Прилёт в Париж, трансфер в отель. Лёгкая прогулка по вечернему городу — Елисейские поля, рождественские витрины, первые огни.</p>
+            </div>
+
+            <div class="day">
+                <div class="day-num">2</div>
+                <div class="day-city">Париж</div>
+                <h3>Остров Сите и Нотр-Дам <span class="day-date">27 дек</span></h3>
+                <p>Прогулка по острову Сите, Нотр-Дам, Латинский квартал. Вечером — уютный ужин в районе Сен-Жермен.</p>
+            </div>
+
+            <div class="polaroid-inline rot-r">
+                <div class="polaroid-frame">
+                    <img src="img/notre-dame.jpg" alt="Нотр-Дам" style="background:#D9CFBB; display:flex; align-items:center; justify-content:center; color:var(--text-soft); font-size:14px; font-family:'Fraunces',serif; font-style:italic;">
+                </div>
+                <div class="polaroid-caption">Нотр-Дам</div>
+            </div>
+
+            <div class="day">
+                <div class="day-num">3</div>
+                <div class="day-city">Париж</div>
+                <h3>Монмартр <span class="day-date">28 дек</span></h3>
+                <p>Подъём на Монмартр, Сакре-Кёр, улочки художников, площадь Тертр. Свободный вечер.</p>
+            </div>
+
+            <div class="day">
+                <div class="day-num">4</div>
+                <div class="day-city">Париж</div>
+                <h3>Фалафель, музеи и сады <span class="day-date">29 дек</span></h3>
+                <p>С утра — забегаловка с лучшим фалафелем по моей версии. Потом на выбор: Лувр или музей Орсе. После — прогулка по Люксембургским садам и Пантеон.</p>
+            </div>
+
+            <div class="day">
+                <div class="day-num">5</div>
+                <div class="day-city">Париж</div>
+                <h3>Свободный день <span class="day-date">30 дек</span></h3>
+                <p>Полностью свободный день. Подскажу, где хорошие винтажные магазины, виниловые пластинки и другие интересные места.</p>
+            </div>
+
+            <div class="day">
+                <div class="day-num">6</div>
+                <div class="day-city">Париж</div>
+                <h3>Новый год в Париже! 🎄 <span class="day-date">31 дек</span></h3>
+                <p>Обед в ресторане. Днём — прогулка по городу. В полночь — шампанское у Эйфелевой башни и встреча Нового года. Салют, праздник, атмосфера.</p>
+            </div>
+
+            <div class="polaroid-inline rot-l">
+                <div class="polaroid-frame">
+                    <img src="img/eiffel-newyear.jpg" alt="Эйфелева башня в Новый год" style="background:#D9CFBB; display:flex; align-items:center; justify-content:center; color:var(--text-soft); font-size:14px; font-family:'Fraunces',serif; font-style:italic;">
+                </div>
+                <div class="polaroid-caption">Эйфелева башня в Новый год</div>
+            </div>
+
+            <div class="day">
+                <div class="day-num">7</div>
+                <div class="day-city">Париж → Страсбург</div>
+                <h3>Переезд в Эльзас <span class="day-date">1 янв</span></h3>
+                <p>Днём — поезд TGV в Страсбург. Прогулка по району Маленькая Франция, знакомство с эльзасской столицей. Ужин в традиционном ресторане.</p>
+            </div>
+
+            <div class="day">
+                <div class="day-num">8</div>
+                <div class="day-city">Эльзас</div>
+                <h3>Кольмар и забытые деревни <span class="day-date">2 янв</span></h3>
+                <p>Утром выезжаем в Кольмар. Я покажу, где заканчивается туристический центр и начинается настоящий Эльзас: фахверковые дома XVI века и узкие улочки, где можно потеряться на час. По желанию — заедем в Эгисхайм, одну из самых красивых деревень Франции. Там нет толп, только старые виноградники и тишина. А ещё — лучший гевюрцтраминер, который я пробовал в Эльзасе. Вечером — ужин в семейном ресторане с чёрной доской вместо меню. Только еда, вино и разговоры с местными.</p>
+            </div>
+
+            <div class="polaroid-inline rot-r">
+                <div class="polaroid-frame">
+                    <img src="img/colmar.jpg" alt="Кольмар" style="background:#D9CFBB; display:flex; align-items:center; justify-content:center; color:var(--text-soft); font-size:14px; font-family:'Fraunces',serif; font-style:italic;">
+                </div>
+                <div class="polaroid-caption">Кольмар</div>
+            </div>
+
+            <div class="day">
+                <div class="day-num">9</div>
+                <div class="day-city">Возвращение</div>
+                <h3>Домой или продолжение пути <span class="day-date">3 янв</span></h3>
+                <p>Трансфер в аэропорт Базеля для вылета домой. Для тех, кто хочет остаться — помогаю с маршрутом и логистикой.</p>
+            </div>
+
+            <div class="polaroid-inline rot-l">
+                <div class="polaroid-frame">
+                    <img src="img/alsace-winter.jpg" alt="Эльзас зимой" style="background:#D9CFBB; display:flex; align-items:center; justify-content:center; color:var(--text-soft); font-size:14px; font-family:'Fraunces',serif; font-style:italic;">
+                </div>
+                <div class="polaroid-caption">Эльзас зимой</div>
+            </div>
+
+        </div>
+
+        <div class="perf"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+        <div class="section-label">🥂 Гастрономия Эльзаса</div>
+        <div class="food-grid">
+            <div class="food-col">
+                <b>Что попробовать</b>
+                <ul>
+                    <li>Фуа-гра</li>
+                    <li>Шукрут</li>
+                    <li>Тарт фламбе</li>
+                    <li>Кугельхоф</li>
+                </ul>
+            </div>
+            <div class="food-col">
+                <b>Вино</b>
+                <ul>
+                    <li>Гевюрцтраминер</li>
+                    <li>Рислинг</li>
+                    <li>Пино-гри</li>
+                    <li>Крёман</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="perf"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+        <div class="included-grid">
+            <div class="card-box">
+                <h4>💶 В стоимость входит</h4>
+                <ul>
+                    <li>✅ 8 ночей в отелях 3–4*</li>
+                    <li>✅ Завтраки</li>
+                    <li>✅ Новогодний ужин с шампанским</li>
+                    <li>✅ Встреча в аэропорту и трансфер</li>
+                    <li>✅ Переезд Париж–Страсбург на TGV</li>
+                    <li>✅ Дегустация вин в Эльзасе</li>
+                    <li>✅ Сопровождение организатора</li>
+                    <li>✅ Помощь с визой и подбором билетов</li>
+                </ul>
+            </div>
+            <div class="card-box extra">
+                <h4>🧳 Дополнительно оплачивается</h4>
+                <ul>
+                    <li>✈️ Авиаперелёт</li>
+                    <li>🍽️ Обеды и ужины (кроме новогоднего)</li>
+                    <li>🛡️ Медицинская страховка</li>
+                    <li>🛂 Шенгенская виза</li>
+                    <li>🎫 Входные билеты в музеи</li>
+                    <li>🛒 Личные расходы</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="note">
+            <p><b style="color: var(--stamp-red); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; display: block; margin-bottom: 7px;">Важно про визу</b>Для поездки на Новый год нужно подаваться на визу в октябре. Я помогаю с документами, записью и проверкой анкет.</p>
+        </div>
+
+        <footer>
+            <p class="footer-line">Маршрут живой и может чуть меняться<br>под группу и погоду.</p>
+            <a href="https://t.me/kirillpekov" class="contact-btn">Написать в Telegram</a>
+            <p class="footer-sub">@kirillpekov · ПЕК: пить, есть и колесить</p>
+        </footer>
+
+    </div>
+
+    <button onclick="window.history.back()" class="floating-back-btn" title="Вернуться назад">
+        <svg class="back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+    </button>
+
+</body>
+</html>
