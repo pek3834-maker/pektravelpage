@@ -1,10 +1,25 @@
-name: Deploy Website to Yandex Cloudon:push:branches:- main  # Проверьте: если ваша главная ветка называется master, замените main на masterjobs:deploy:runs-on: ubuntu-lateststeps:- name: Checkout codeuses: actions/checkout@v4name: Sync files to Yandex Object Storage
+name: Deploy Website to Yandex Cloud 
+
+on:
+push:
+branches:
+- main
+- master 
+
+jobs:
+deploy:
+runs-on: ubuntu-latest
+steps:
+- name: Checkout code
+uses: actions/checkout@v4 
+
+* name: Sync files to Yandex Object Storage
 uses: jakejarvis/s3-sync-action@master
 with:
-args: --endpoint-url=https://storage.yandexcloud.net --acl public-read --delete
+args: --endpoint-url=[https://storage.yandexcloud.net](https://storage.yandexcloud.net) --acl public-read --delete
 env:
 AWS_S3_BUCKET: 'pek-travel.ru'
 AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
 AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 AWS_REGION: 'ru-central1'
-SOURCE_DIR: '.' 
+SOURCE_DIR: '.'
