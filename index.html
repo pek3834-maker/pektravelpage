@@ -828,13 +828,9 @@
         <div class="tour-price">100 000 ₽<span>с человека</span></div>
       <div class="tour-cta">
   <a href="tour-graffiti" class="tour-link">Программа путешествия →</a>
-  
-  <!-- Обновленная кнопка с выпадающим меню внутри -->
-  <div class="tour-book-wrapper">
-    <a href="#" class="tour-book" onclick="return false;">Написать</a>
-    <div class="tour-dropdown-menu">
-      <a href="https://vk.ru/mr.pekov" target="_blank" rel="noopener">ВКонтакте</a>
-      <a href="https://t.me" target="_blank" rel="noopener">Telegram</a>
+  <!-- Кнопка вызывает открытие меню -->
+  <a href="#" class="tour-book" onclick="toggleTourMenu(event, this)">Написать</a>
+</div>
     </div>
   </div>
 </div>
@@ -853,14 +849,9 @@
       </div>
       <div class="tour-cta">
   <a href="tour-graffiti" class="tour-link">Программа путешествия →</a>
-  
-  <!-- Обновленная кнопка с выпадающим меню внутри -->
-  <div class="tour-book-wrapper">
-    <a href="#" class="tour-book" onclick="return false;">Написать</a>
-    <div class="tour-dropdown-menu">
-      <a href="https://vk.ru/mr.pekov" target="_blank" rel="noopener">ВКонтакте</a>
-      <a href="https://t.me" target="_blank" rel="noopener">Telegram</a>
-    </div>
+  <!-- Кнопка вызывает открытие меню -->
+  <a href="#" class="tour-book" onclick="toggleTourMenu(event, this)">Написать</a>
+</div>
   </div>
 </div>
     </div>
@@ -878,14 +869,9 @@
       </div>
      <div class="tour-cta">
   <a href="tour-graffiti" class="tour-link">Программа путешествия →</a>
-  
-  <!-- Обновленная кнопка с выпадающим меню внутри -->
-  <div class="tour-book-wrapper">
-    <a href="#" class="tour-book" onclick="return false;">Написать</a>
-    <div class="tour-dropdown-menu">
-      <a href="https://vk.ru/mr.pekov" target="_blank" rel="noopener">ВКонтакте</a>
-      <a href="https://t.me" target="_blank" rel="noopener">Telegram</a>
-    </div>
+  <!-- Кнопка вызывает открытие меню -->
+  <a href="#" class="tour-book" onclick="toggleTourMenu(event, this)">Написать</a>
+</div>
   </div>
 </div>
     </div>
@@ -903,14 +889,9 @@
       </div>
       <div class="tour-cta">
   <a href="tour-graffiti" class="tour-link">Программа путешествия →</a>
-  
-  <!-- Обновленная кнопка с выпадающим меню внутри -->
-  <div class="tour-book-wrapper">
-    <a href="#" class="tour-book" onclick="return false;">Написать</a>
-    <div class="tour-dropdown-menu">
-      <a href="https://vk.ru/mr.pekov" target="_blank" rel="noopener">ВКонтакте</a>
-      <a href="https://t.me" target="_blank" rel="noopener">Telegram</a>
-    </div>
+  <!-- Кнопка вызывает открытие меню -->
+  <a href="#" class="tour-book" onclick="toggleTourMenu(event, this)">Написать</a>
+</div>
   </div>
 </div>
     </div>
@@ -1026,6 +1007,70 @@
     <polyline points="5 12 12 5 19 12"></polyline>
   </svg>
 </button>
+  <!-- Само меню (абсолютно независимо от верстки туров) -->
+<div id="tourGlobalDropdown" class="tour-global-dropdown">
+  <a href="https://vk.ru" target="_blank" rel="noopener">ВКонтакте</a>
+  <a href="https://t.me" target="_blank" rel="noopener">Telegram</a> <!-- Укажите ваш ник -->
+</div>
+
+<style>
+/* Стили независимого меню */
+.tour-global-dropdown {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  min-width: 150px;
+  box-shadow: 0px 4px 16px rgba(0,0,0,0.2);
+  border-radius: 6px;
+  padding: 6px 0;
+  z-index: 99999; /* Поверх всего на сайте */
+}
+
+.tour-global-dropdown a {
+  color: #222222 !important;
+  padding: 12px 18px;
+  text-decoration: none !important;
+  display: block;
+  font-family: sans-serif;
+  font-size: 14px;
+  text-align: left;
+  transition: background 0.2s ease;
+}
+
+.tour-global-dropdown a:hover {
+  background-color: #f5f5f5;
+}
+</style>
+
+<script>
+function toggleTourMenu(event, buttonElement) {
+  event.preventDefault(); // Запрещаем переход по ссылке #
+  event.stopPropagation(); // Стопаем всплытие события
+  
+  const menu = document.getElementById('tourGlobalDropdown');
+  
+  // Если меню уже открыто, закрываем его
+  if (menu.style.display === 'block') {
+    menu.style.display = 'none';
+    return;
+  }
+  
+  // Получаем точные координаты кнопки на экране
+  const rect = buttonElement.getBoundingClientRect();
+  
+  // Позиционируем меню ровно под кнопкой с учетом прокрутки страницы
+  menu.style.top = (rect.bottom + window.scrollY) + 'px';
+  menu.style.left = (rect.left + window.scrollX) + 'px';
+  menu.style.display = 'block';
+}
+
+// Закрываем меню, если пользователь кликнул в любое другое место сайта
+document.addEventListener('click', function() {
+  const menu = document.getElementById('tourGlobalDropdown');
+  if (menu) menu.style.display = 'none';
+});
+</script>
+
 
   
 </body>
