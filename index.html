@@ -527,6 +527,39 @@
     padding-top: 16px;
     border-top: 1px solid var(--line);
   }
+  .tour-book-wrapper {
+  position: relative;
+  display: inline-block;
+}
+.tour-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #ffffff;
+  min-width: 150px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
+  border-radius: 6px;
+  margin-top: 8px;
+  padding: 6px 0;
+  z-index: 100;
+}
+.tour-dropdown-menu a {
+  color: #222222 !important;
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: left;
+  transition: background 0.2s ease;
+}
+.tour-dropdown-menu a:hover {
+  background-color: #f5f5f5;
+}
+.tour-book-wrapper:hover .tour-dropdown-menu {
+  display: block;
+}
 
   .tour-link {
     font-family: 'JetBrains Mono', monospace;
@@ -792,12 +825,19 @@
       <h3>Граффити-тур: Будапешт + Вена + Берлин</h3>
       <div class="tour-meta-row">
         <div class="tour-dates"><b>Даты</b>10 — 18 октября</div>
-        <div class="tour-price">75 000 ₽<span>с человека</span></div>
-      </div>
+        <div class="tour-price">100 000 ₽<span>с человека</span></div>
       <div class="tour-cta">
-        <a href="tour-graffiti" class="tour-link">Программа путешествия →</a>
-        <a href="https://vk.ru/mr.pekov" class="tour-book">Написать</a>
-      </div>
+  <a href="tour-graffiti" class="tour-link">Программа путешествия →</a>
+  
+  <!-- Обновленная кнопка с выпадающим меню внутри -->
+  <div class="tour-book-wrapper">
+    <a href="#" class="tour-book" onclick="return false;">Написать</a>
+    <div class="tour-dropdown-menu">
+      <a href="https://vk.ru/mr.pekov" target="_blank" rel="noopener">ВКонтакте</a>
+      <a href="https://t.me" target="_blank" rel="noopener">Telegram</a>
+    </div>
+  </div>
+</div>
     </div>
 
     <!-- TOUR 3 -->
@@ -809,12 +849,20 @@
       <h3>Франция без спешки: Лион + Париж</h3>
       <div class="tour-meta-row">
         <div class="tour-dates"><b>Даты</b>7 — 15 ноября</div>
-        <div class="tour-price">800 €<span>с человека</span></div>
+        <div class="tour-price">1 600 €<span>с человека</span></div>
       </div>
       <div class="tour-cta">
-        <a href="francetour" class="tour-link">Программа путешествия →</a>
-        <a href="https://vk.ru/mr.pekov" class="tour-book">Написать</a>
-      </div>
+  <a href="tour-graffiti" class="tour-link">Программа путешествия →</a>
+  
+  <!-- Обновленная кнопка с выпадающим меню внутри -->
+  <div class="tour-book-wrapper">
+    <a href="#" class="tour-book" onclick="return false;">Написать</a>
+    <div class="tour-dropdown-menu">
+      <a href="https://vk.ru/mr.pekov" target="_blank" rel="noopener">ВКонтакте</a>
+      <a href="https://t.me" target="_blank" rel="noopener">Telegram</a>
+    </div>
+  </div>
+</div>
     </div>
 
     <!-- TOUR 4 -->
@@ -826,12 +874,20 @@
       <h3>Рождественские ярмарки: Будапешт + Берлин</h3>
       <div class="tour-meta-row">
         <div class="tour-dates"><b>Даты</b>21–29 ноя / 12–20 дек</div>
-        <div class="tour-price">75 000 ₽<span>с человека</span></div>
+        <div class="tour-price">120 000 ₽<span>с человека</span></div>
       </div>
-      <div class="tour-cta">
-        <a href="tour-christmas" class="tour-link">Программа путешествия →</a>
-        <a href="https://vk.ru/mr.pekov" class="tour-book">Написать</a>
-      </div>
+     <div class="tour-cta">
+  <a href="tour-graffiti" class="tour-link">Программа путешествия →</a>
+  
+  <!-- Обновленная кнопка с выпадающим меню внутри -->
+  <div class="tour-book-wrapper">
+    <a href="#" class="tour-book" onclick="return false;">Написать</a>
+    <div class="tour-dropdown-menu">
+      <a href="https://vk.ru/mr.pekov" target="_blank" rel="noopener">ВКонтакте</a>
+      <a href="https://t.me" target="_blank" rel="noopener">Telegram</a>
+    </div>
+  </div>
+</div>
     </div>
 
      <!-- TOUR 5 -->
@@ -843,12 +899,20 @@
       <h3>Париж и Эльзас на Новый год</h3>
       <div class="tour-meta-row">
         <div class="tour-dates"><b>Даты</b>26 дек – 3 янв</div>
-        <div class="tour-price">1 000 €<span>с человека</span></div>
+        <div class="tour-price">2 000 €<span>с человека</span></div>
       </div>
       <div class="tour-cta">
-        <a href="france_new_year" class="tour-link">Программа путешествия →</a>
-        <a href="https://vk.ru/mr.pekov" class="tour-book">Написать</a>
-      </div>
+  <a href="tour-graffiti" class="tour-link">Программа путешествия →</a>
+  
+  <!-- Обновленная кнопка с выпадающим меню внутри -->
+  <div class="tour-book-wrapper">
+    <a href="#" class="tour-book" onclick="return false;">Написать</a>
+    <div class="tour-dropdown-menu">
+      <a href="https://vk.ru/mr.pekov" target="_blank" rel="noopener">ВКонтакте</a>
+      <a href="https://t.me" target="_blank" rel="noopener">Telegram</a>
+    </div>
+  </div>
+</div>
     </div>
 
   </div>
